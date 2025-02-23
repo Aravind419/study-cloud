@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>6th Semester Study Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Subjects 📚</h2>
+      <ul id="subjectList">
+        <li data-subject="Mobile App Dev Lab" class="active">Mobile App Dev Lab</li>
+        <li data-subject="Object-Oriented Software Engineering">Object-Oriented Software Engineering</li>
+        <li data-subject="Industrial Engineering">Industrial Engineering</li>
+        <li data-subject="Data Warehousing">Data Warehousing</li>
+        <li data-subject="Network Security">Network Security</li>
+        <li data-subject="Multimedia & Animation">Multimedia & Animation</li>
+        <li data-subject="3D Printing & Design">3D Printing & Design</li>
+        <li data-subject="Well-Being & Yoga">Well-Being & Yoga</li>
+      </ul>
+    </aside>
+    <main class="content">
+      <h1 id="subjectTitle">Mobile App Dev Lab</h1>
+      <div class="tabs">
+        <button class="tab active" data-tab="codeTab">🖥️ Code</button>
+        <button class="tab" data-tab="pdfTab">📄 PDFs</button>
+        <button class="tab" data-tab="imageTab">🖼️ Images</button>
+        <button class="tab" data-tab="taskTab">✅ Tasks</button>
+      </div>
+      <div id="codeTab" class="tab-content active">
+        <textarea id="codeArea" placeholder="Paste your code here (non-executable)"></textarea>
+        <button id="saveCode">💾 Save Code</button>
+        <details id="codeSummary">
+          <summary>View Saved Code Summary</summary>
+          <pre id="savedCodeDisplay"></pre>
+        </details>
+      </div>
+      <div id="pdfTab" class="tab-content">
+        <input type="file" id="pdfInput" accept=".pdf">
+        <button id="uploadPDF">⬆️ Upload PDF</button>
+        <ul id="pdfList"></ul>
+      </div>
+      <div id="imageTab" class="tab-content">
+        <input type="file" id="imageInput" accept="image/*">
+        <button id="uploadImage">⬆️ Upload Image</button>
+        <button id="captureImage">📷 Capture Image</button>
+        <div id="cameraSection" style="display:none;">
+          <video id="video" autoplay playsinline></video>
+          <button id="snap">📸 Snap Photo</button>
+          <button id="closeCamera">❌ Close Camera</button>
+          <canvas id="canvas" style="display:none;"></canvas>
+        </div>
+        <ul id="imageList"></ul>
+      </div>
+      <div id="taskTab" class="tab-content">
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button id="addTask">➕ Add Task</button>
+        <ul id="taskList"></ul>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
