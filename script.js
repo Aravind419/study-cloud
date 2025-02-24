@@ -46,11 +46,13 @@ function loadSubjectData() {
 }
 
 // Function to render file lists for PDFs and images
+// Function to render file lists for PDFs and images
 function renderFileList(type, files, listId, isImage = false) {
   const list = document.getElementById(listId);
   list.innerHTML = "";
   files.forEach((file, index) => {
     const li = document.createElement("li");
+
     if (isImage) {
       const img = document.createElement("img");
       img.src = file.dataUrl;
@@ -59,9 +61,11 @@ function renderFileList(type, files, listId, isImage = false) {
       img.style.marginRight = "10px";
       li.appendChild(img);
     }
+
     const span = document.createElement("span");
     span.textContent = file.fileName;
     li.appendChild(span);
+
     const link = document.createElement("a");
     link.href = file.dataUrl;
     link.download = file.fileName;
@@ -69,9 +73,22 @@ function renderFileList(type, files, listId, isImage = false) {
     link.style.color = "#fff";
     link.style.textDecoration = "underline";
     li.appendChild(link);
+
+    // ❌ Add Delete Button ❌
+    const delButton = document.createElement("button");
+    delButton.textContent = "❌";
+    delButton.style.marginLeft = "10px";
+    delButton.addEventListener("click", () => {
+      studyHubData[currentSubject][type].splice(index, 1);
+      saveData();
+      renderFileList(type, studyHubData[currentSubject][type], listId, isImage);
+    });
+
+    li.appendChild(delButton);
     list.appendChild(li);
   });
 }
+
 
 // Function to render tasks list
 function renderTasks(tasks) {
@@ -265,3 +282,29 @@ closeCameraBtn.addEventListener("click", () => {
 
 // Initial load
 loadSubjectData();
+
+function deletePDF(index) {
+  let pdfs = JSON.parse(localStorage.getItem("pdfs") || "[]");
+  pdfs.splice(index, 1);
+  localStorage.setItem("pdfs", JSON.stringify(pdfs));
+  document.querySelector("#pdfList").innerHTML = "";
+  displayPDFs();
+}
+
+// Delete Image
+function deleteImage(index) {
+  let images = JSON.parse(localStorage.getItem("images") || "[]");
+  images.splice(index, 1);
+  localStorage.setItem("images", JSON.stringify(images));
+  document.querySelector("#imageList").innerHTML = "";
+  displayImages();
+}
+
+// Delete Task
+function deleteTask(index) {
+  let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  tasks.splice(index, 1);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  document.querySelector("#taskList").innerHTML = "";
+  displayTasks();
+}
